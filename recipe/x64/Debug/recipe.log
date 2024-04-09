@@ -1,2 +1,3 @@
 ﻿  main.c
-  recipe.vcxproj -> C:\Users\psant\conestoga\PROG71985\groupProject\x64\Debug\recipe.exe
+C:\Users\Dell\source\repos\PROG71985_Group12p\recipe\main.c(31,4): warning C4013: 'updateRecipe' undefined; assuming extern returning int
+  recipe.vcxproj -> C:\Users\Dell\Source\Repos\PROG71985_Group12p\x64\Debug\recipe.exe

@@ -5,7 +5,7 @@
 #define MAXINGREDIENT	99
 #define MAXINSTRUCTION	500
 #define MAXLIST	15
-
+#define MAXRECIPES 10
 typedef struct ingredients {
 	float quantity;
 	char ingredient[MAXINGREDIENT];
@@ -24,3 +24,6 @@ typedef struct recipe {
 	int totalSteps;
 	STEPS stepsList[MAXLIST];
 } RECIPE;
+
+void addRecipe();
+void deleteRecipe(int recipeNumber);
