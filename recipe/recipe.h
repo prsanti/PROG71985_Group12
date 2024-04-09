@@ -9,7 +9,9 @@
 typedef struct recipe {
 	int recipeNumber;
 	char name[MAXNAME];
+	int totalIngredients;
 	INGREDIENTS ingredientList[MAXLIST];
+	int totalSteps;
 	STEPS stepsList[MAXLIST];
 } RECIPE;
 
