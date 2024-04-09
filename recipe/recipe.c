@@ -9,20 +9,20 @@ int numRecipes = 0;
 void addRecipe() {
     if (numRecipes < MAXRECIPES) {
         printf("Enter recipe name:\n ");
-        scanf_s("%s", recipe[numRecipes].name);
+        scanf("%s", recipe[numRecipes].name);
         printf("Enter total number of ingredients:\n ");
-        scanf_s("%d", &recipe[numRecipes].totalIngredients);
+        scanf("%d", &recipe[numRecipes].totalIngredients);
         for (int i = 0; i < recipe[numRecipes].totalIngredients; ++i) {
             printf("Enter quantity for ingredient %d:\n ", i + 1);
-            scanf_s("%f", &recipe[numRecipes].ingredientList[i].quantity);
+            scanf("%f", &recipe[numRecipes].ingredientList[i].quantity);
             printf("Enter name of ingredient %d:\n ", i + 1);
-            scanf_s("%s", recipe[numRecipes].ingredientList[i].ingredient);
+            scanf("%s", recipe[numRecipes].ingredientList[i].ingredient);
         }
         printf("Enter total number of steps:\n ");
-        scanf_s("%d", &recipe[numRecipes].totalSteps);
+        scanf("%d", &recipe[numRecipes].totalSteps);
         for (int i = 0; i < recipe[numRecipes].totalSteps; ++i) {
             printf("Enter instruction for step %d:\n ", i + 1);
-            scanf_s("%s", recipe[numRecipes].stepsList[i].instruction);
+            scanf("%s", recipe[numRecipes].stepsList[i].instruction);
         }
         recipe[numRecipes].recipeNumber = numRecipes + 1;
         numRecipes++;
@@ -67,18 +67,18 @@ void updateRecipe(int recipenumber) {
         printf("Enter new recipe name:\n ");
         scanf("%s", recipe[recipeindex].name);
         printf("Enter total number of ingredients:\n");
-        scanf_s("%d", &recipe[recipeindex].totalIngredients);
+        scanf("%d", &recipe[recipeindex].totalIngredients);
         for (int i = 0; i < recipe[recipeindex].totalIngredients; ++i) {
             printf("Enter quantity for ingredient %d:\n", i + 1);
-            scanf_s("%f", &recipe[recipeindex].ingredientList[i].quantity);
+            scanf("%f", &recipe[recipeindex].ingredientList[i].quantity);
             printf("Enter name of ingredient %d:\n ", i + 1);
-            scanf_s("%s", recipe[recipeindex].ingredientList[i].ingredient);
+            scanf("%s", recipe[recipeindex].ingredientList[i].ingredient);
         }
         printf("Enter total number of steps:\n ");
-        scanf_s("%d", &recipe[recipeindex].totalSteps);
+        scanf("%d", &recipe[recipeindex].totalSteps);
         for (int i = 0; i < recipe[recipeindex].totalSteps; ++i) {
             printf("Enter instruction for step %d:\n ", i + 1);
-            scanf_s("%s", recipe[recipeindex].stepsList[i].instruction);
+            scanf("%s", recipe[recipeindex].stepsList[i].instruction);
         }
         printf("Recipe updated successfully.\n");
     }
