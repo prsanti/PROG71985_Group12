@@ -8,20 +8,20 @@ int numRecipes = 0;
 //Adding a new recipe
 void addRecipe() {
     if (numRecipes < MAXRECIPES) {
-        printf("Enter recipe name: ");
+        printf("Enter recipe name:\n ");
         scanf("%s", recipe[numRecipes].name);
-        printf("Enter total number of ingredients: ");
+        printf("Enter total number of ingredients:\n ");
         scanf("%d", &recipe[numRecipes].totalIngredients);
         for (int i = 0; i < recipe[numRecipes].totalIngredients; ++i) {
-            printf("Enter quantity for ingredient %d: ", i + 1);
+            printf("Enter quantity for ingredient %d:\n ", i + 1);
             scanf("%f", &recipe[numRecipes].ingredientList[i].quantity);
-            printf("Enter name of ingredient %d: ", i + 1);
+            printf("Enter name of ingredient %d\n: ", i + 1);
             scanf("%s", recipe[numRecipes].ingredientList[i].ingredient);
         }
-        printf("Enter total number of steps: ");
+        printf("Enter total number of steps:\n ");
         scanf("%d", &recipe[numRecipes].totalSteps);
         for (int i = 0; i < recipe[numRecipes].totalSteps; ++i) {
-            printf("Enter instruction for step %d: ", i + 1);
+            printf("Enter instruction for step %d:\n ", i + 1);
             scanf("%s", recipe[numRecipes].stepsList[i].instruction);
         }
         recipe[numRecipes].recipeNumber = numRecipes + 1;
