@@ -1,5 +1,4 @@
 ﻿  recipe.c
 C:\Users\Dell\source\repos\PROG71985_Group12p\recipe\recipe.c(11,9): warning C4013: 'printf' undefined; assuming extern returning int
-C:\Users\Dell\source\repos\PROG71985_Group12p\recipe\recipe.c(12,9): warning C4013: 'scanf_s' undefined; assuming extern returning int
-C:\Users\Dell\source\repos\PROG71985_Group12p\recipe\recipe.c(68,9): warning C4013: 'scanf' undefined; assuming extern returning int
+C:\Users\Dell\source\repos\PROG71985_Group12p\recipe\recipe.c(12,9): warning C4013: 'scanf' undefined; assuming extern returning int
   recipe.vcxproj -> C:\Users\Dell\source\repos\PROG71985_Group12p\x64\Debug\recipe.exe
