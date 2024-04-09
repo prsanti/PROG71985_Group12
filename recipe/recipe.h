@@ -1,19 +1,10 @@
 #pragma once
 
-// PROG71985 - Winter 2024 - Group 12s
+// PROG71985 - Winter 2024 - Group 12
 #define MAXNAME	50
 #define MAXINGREDIENT	99
 #define MAXINSTRUCTION	500
 #define MAXLIST	15
-
-typedef struct recipe {
-	int recipeNumber;
-	char name[MAXNAME];
-	int totalIngredients;
-	INGREDIENTS ingredientList[MAXLIST];
-	int totalSteps;
-	STEPS stepsList[MAXLIST];
-} RECIPE;
 
 typedef struct ingredients {
 	float quantity;
@@ -24,3 +15,12 @@ typedef struct steps {
 	int step;
 	char instruction[MAXINSTRUCTION];
 } STEPS;
+
+typedef struct recipe {
+	int recipeNumber;
+	char name[MAXNAME];
+	int totalIngredients;
+	INGREDIENTS ingredientList[MAXLIST];
+	int totalSteps;
+	STEPS stepsList[MAXLIST];
+} RECIPE;
