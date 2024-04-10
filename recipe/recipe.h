@@ -37,6 +37,6 @@ void deleteRecipe(int recipeNumber);
 void updateRecipe(int recipenumber);
 void displayRecipe(struct RECIPE* recipe);
 void displayRecipeByNumber(int recipenumber);
-void displayRecipeByRange(int offset, int size);
+void displayRecipeByRange(int startIndex, int endIndex);
 void displayAllRecipe();
 void ignoreKeyPress();

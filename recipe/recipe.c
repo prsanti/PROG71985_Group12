@@ -149,6 +149,29 @@ void displayAllRecipe() {
     }
 }
 
+void displayRecipeByRange(int startIndex, int endIndex) {
+    bool receipeFound = false;
+    int start = (startIndex - 1);
+    int size = ((endIndex < numRecipes) ? endIndex : numRecipes);
+    if (size == 1) {
+        if (&recipe[start].totalSteps > 0) {
+            displayRecipe(&recipe[start]);
+            receipeFound = true;
+        }
+    }
+    else {
+        for (int i = start; i < (size); ++i) {
+            if (&recipe[i].totalSteps > 0) {
+                receipeFound = true;
+                displayRecipe(&recipe[i]);
+            }
+        }
+    }
+    if (!receipeFound) {
+        printf("\n********** No Receipes found for Given Range **********\n");
+    }
+}
+
 void ignoreKeyPress(int bufferSize) {
     char buffer[BUFFER_SIZE];
     fgets(buffer, bufferSize, stdin); // To ignore enter key press

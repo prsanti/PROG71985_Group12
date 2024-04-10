@@ -9,7 +9,8 @@ int recipenumber;
 
 int main(void) {
 	bool continueProgram = true;
-
+	int startIndex;
+	int endIndex;
 	while (continueProgram) {
 		printWelcome();
 		char menuChoice = printMenu();
@@ -37,6 +38,19 @@ int main(void) {
 				displayRecipeByNumber(recipenumber);
 				break;
 			case '5':
+				printf("Enter start index for recipe number (1 or above): ");
+				scanf_s("%d", &startIndex);
+				if (startIndex < 1) {
+					printf("\nInvalid start index it sould be greate than 1\n");
+					break;
+				}
+				printf("Enter last index for recipe number: ");
+				scanf_s("%d", &endIndex);
+				if (endIndex < startIndex) {
+					printf("\nLast Index cannot be less than start index\n");
+					break;
+				}
+				displayRecipeByRange(startIndex, endIndex);
 				break;
 			case '6':
 				displayAllRecipe();
