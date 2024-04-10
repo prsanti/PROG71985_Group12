@@ -1,11 +1,17 @@
 #pragma once
 
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdbool.h>
+
 // PROG71985 - Winter 2024 - Group 12
 #define MAXNAME	50
 #define MAXINGREDIENT	99
 #define MAXINSTRUCTION	500
 #define MAXLIST	15
 #define MAXRECIPES 10
+#define BUFFER_SIZE 2
 typedef struct ingredients {
 	float quantity;
 	char ingredient[MAXINGREDIENT];
@@ -27,3 +33,10 @@ typedef struct recipe {
 
 void addRecipe();
 void deleteRecipe(int recipeNumber);
+void updateRecipe(int recipenumber);
+void displayRecipe(struct RECIPE* recipe);
+void displayRecipeByNumber(int recipenumber);
+void displayRecipeByRange(int offset, int size);
+void displayAllRecipe();
+void ignoreKeyPress();
+bool checkIfDigit(char input[]);

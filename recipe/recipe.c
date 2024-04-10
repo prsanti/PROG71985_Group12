@@ -8,25 +8,40 @@ int numRecipes = 0;
 //Adding a new recipe
 void addRecipe() {
     if (numRecipes < MAXRECIPES) {
+        char recipeName[MAXNAME];
         printf("Enter recipe name:\n ");
-        scanf("%s", recipe[numRecipes].name);
+        ignoreKeyPress(2);
+        fgets(recipeName, sizeof(recipeName), stdin);
+        recipeName[strcspn(recipeName, "\n")] = '\0';
+        strcpy(recipe[numRecipes].name, recipeName);
         printf("Enter total number of ingredients:\n ");
         scanf("%d", &recipe[numRecipes].totalIngredients);
         for (int i = 0; i < recipe[numRecipes].totalIngredients; ++i) {
+            char ingredient[MAXINGREDIENT];
             printf("Enter quantity for ingredient %d:\n ", i + 1);
             scanf("%f", &recipe[numRecipes].ingredientList[i].quantity);
             printf("Enter name of ingredient %d:\n ", i + 1);
-            scanf("%s", recipe[numRecipes].ingredientList[i].ingredient);
+            ignoreKeyPress(2);
+            fgets(ingredient, MAXINGREDIENT, stdin);
+            ingredient[strcspn(ingredient, "\n")] = '\0';
+            strcpy(recipe[numRecipes].ingredientList[i].ingredient, ingredient);
         }
         printf("Enter total number of steps:\n ");
         scanf("%d", &recipe[numRecipes].totalSteps);
+        ignoreKeyPress(2);
         for (int i = 0; i < recipe[numRecipes].totalSteps; ++i) {
-            printf("Enter instruction for step %d:\n ", i + 1);
-            scanf("%s", recipe[numRecipes].stepsList[i].instruction);
+            int stepNumber = i + 1;
+            char instruction[MAXINSTRUCTION];
+            recipe[numRecipes].stepsList[i].step = stepNumber;
+            printf("Enter instruction for step %d:\n ", stepNumber);
+            ignoreKeyPress(1);
+            fgets(instruction, MAXINSTRUCTION, stdin);
+            instruction[strcspn(instruction, "\n")] = '\0';
+            strcpy(recipe[numRecipes].stepsList[i].instruction, instruction);
         }
         recipe[numRecipes].recipeNumber = numRecipes + 1;
         numRecipes++;
-        printf("Recipe added successfully.\n");
+        printf("\n*************** Recipe added successfully **************\n");
     }
     else {
         printf("Cannot add more recipes. Recipe limit reached.\n");
@@ -85,4 +100,52 @@ void updateRecipe(int recipenumber) {
     else {
         printf("Recipe not found.\n");
     }
+}
+
+void displayRecipeByNumber(int recipenumber) {
+    bool receipeFound = false;
+    for (int i = 0; i < numRecipes; ++i) {
+        if (recipe[i].recipeNumber == recipenumber) {
+            receipeFound = true;
+            displayRecipe(&recipe[i]);
+            break;
+        }
+    }
+    if (!receipeFound) {
+        printf("Recipe number : %d not found.\n", recipenumber);
+    }
+
+}
+
+void displayRecipe(RECIPE* rcp) {
+    printf("\n**************************************\n");
+    printf("**** Receipe Name : %s \n\n", rcp->name);
+    printf("********** Receipe ingredients ********\n");
+    
+    for (int i = 0;i < rcp->totalIngredients; i++) {
+        INGREDIENTS ingredient = rcp->ingredientList[i];
+        printf("**** %d. Ingredient Name : %s , Ingredient Quantity : %f\n", 
+            (i+1), ingredient.ingredient, ingredient.quantity);
+    }
+    printf("\n********** Receipe Steps ************a\n");
+    
+    for (int i = 0;i < rcp->totalSteps; i++) {
+        STEPS step = rcp->stepsList[i];
+        printf("**** Step %d : %s \n", step.step, step.instruction);
+    }
+    printf("\n**************************************\n\n");
+}
+
+void ignoreKeyPress(int bufferSize) {
+    char buffer[BUFFER_SIZE];
+    fgets(buffer, bufferSize, stdin); // To ignore enter key press
+}
+
+bool checkIfNotDigit(char input[]) {
+    for (int i = 0;i < sizeOf(input);i++) {
+        if (!isdigit(input[i])) {
+            return false;
+        }
+    }
+    return true;
 }

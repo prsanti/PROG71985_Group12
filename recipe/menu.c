@@ -13,17 +13,17 @@ void printWelcome() {
 char printMenu() {
 	char menuChoice;
 
-	printf("a) Add new recipe\n");
-	printf("b) Delete existing recipe\n");
-	printf("c) Update existing recipe\n");
-	printf("d) Display recipe by recipe number\n");
-	printf("e) Display range of recipes by recipe numbers\n");
-	printf("f) Display all recipes\n");
-	printf("f) Search for recipe\n");
-	printf("g) Sort recipes alphabetically\n");
-	printf("q) Quit\n");
+	printf("1. Add new recipe\n");
+	printf("2. Delete existing recipe\n");
+	printf("3. Update existing recipe\n");
+	printf("4. Display recipe by recipe number\n");
+	printf("5. Display range of recipes by recipe numbers\n");
+	printf("6. Display all recipes\n");
+	printf("7. Search for recipe\n");
+	printf("8. Sort recipes alphabetically\n");
+	printf("0. Quit\n");
 
-	printf("Enter a character:");
+	printf("Enter your choice (1-8):\n");
 
 	// convert user input to 0 or 1
 	// add space for scanf to avoid whitespace
