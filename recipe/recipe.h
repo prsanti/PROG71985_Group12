@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <ctype.h> 
 
 // PROG71985 - Winter 2024 - Group 12
 #define MAXNAME	50
@@ -39,4 +40,3 @@ void displayRecipeByNumber(int recipenumber);
 void displayRecipeByRange(int offset, int size);
 void displayAllRecipe();
 void ignoreKeyPress();
-bool checkIfDigit(char input[]);

@@ -112,14 +112,15 @@ void displayRecipeByNumber(int recipenumber) {
         }
     }
     if (!receipeFound) {
-        printf("Recipe number : %d not found.\n", recipenumber);
+        printf("\n********** Recipe number : %d not found **********\n", recipenumber);
     }
 
 }
 
 void displayRecipe(RECIPE* rcp) {
     printf("\n**************************************\n");
-    printf("**** Receipe Name : %s \n\n", rcp->name);
+    printf("Receipe Number : %d \n\n", rcp->recipeNumber);
+    printf("Receipe Name : %s \n\n", rcp->name);
     printf("********** Receipe ingredients ********\n");
     
     for (int i = 0;i < rcp->totalIngredients; i++) {
@@ -127,7 +128,7 @@ void displayRecipe(RECIPE* rcp) {
         printf("**** %d. Ingredient Name : %s , Ingredient Quantity : %f\n", 
             (i+1), ingredient.ingredient, ingredient.quantity);
     }
-    printf("\n********** Receipe Steps ************a\n");
+    printf("\n********** Receipe Steps *************\n");
     
     for (int i = 0;i < rcp->totalSteps; i++) {
         STEPS step = rcp->stepsList[i];
@@ -136,16 +137,19 @@ void displayRecipe(RECIPE* rcp) {
     printf("\n**************************************\n\n");
 }
 
+void displayAllRecipe() {
+    if (numRecipes > 0) {
+        printf("\n********** Total Recipes Found : %d **********\n", numRecipes );
+        for (int i = 0; i < numRecipes; ++i) {
+            displayRecipe(&recipe[i]);
+        }
+    }
+    else {
+        printf("\n********** No Recipes Found **********\n");
+    }
+}
+
 void ignoreKeyPress(int bufferSize) {
     char buffer[BUFFER_SIZE];
     fgets(buffer, bufferSize, stdin); // To ignore enter key press
-}
-
-bool checkIfNotDigit(char input[]) {
-    for (int i = 0;i < sizeOf(input);i++) {
-        if (!isdigit(input[i])) {
-            return false;
-        }
-    }
-    return true;
 }

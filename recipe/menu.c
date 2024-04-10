@@ -4,10 +4,12 @@
 // PROG71985 - Winter 2024 - Group 12
 
 void printWelcome() {
-	printf(" **********************\n");
-	printf("**     Welcome to     **\n");
-	printf("**    Recipe Maker    **\n");
-	printf(" **********************\n");
+	printf("\n");
+	printf("**********************\n");
+	printf("**     Welcome to   **\n");
+	printf("**    Recipe Maker  **\n");
+	printf("**********************\n");
+	printf("\n");
 }
 
 char printMenu() {

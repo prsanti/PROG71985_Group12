@@ -1,9 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "recipe.h"
 #include "menu.h"
-#include <stdio.h>
-#include <stdbool.h>
-#include<ctype.h> 
 
 
 int recipenumber;
@@ -42,6 +39,7 @@ int main(void) {
 			case '5':
 				break;
 			case '6':
+				displayAllRecipe();
 				break;
 			case '7':
 				break;
