@@ -1,4 +1,6 @@
 #pragma once
+#include <stdbool.h>
+#include <stdio.h>
 
 // PROG71985 - Winter 2024 - Group 12
 #define MAXNAME	50
@@ -6,6 +8,7 @@
 #define MAXINSTRUCTION	500
 #define MAXLIST	15
 #define MAXRECIPES 10
+
 typedef struct ingredients {
 	float quantity;
 	char ingredient[MAXINGREDIENT];
@@ -25,5 +28,16 @@ typedef struct recipe {
 	STEPS stepsList[MAXLIST];
 } RECIPE;
 
-void addRecipe();
-void deleteRecipe(int recipeNumber);
+void addRecipe(RECIPE recipe[]);
+
+void deleteRecipe(RECIPE recipe[], int recipeNumber);
+
+void updateRecipe(RECIPE recipe[], int recipenumber);
+
+void populateEmptyFile(FILE* fp);
+
+bool loadDataFromFile(RECIPE r[], char* filename);
+
+bool saveDataToFile(RECIPE r[], char* filename);
+
+void printRecipe(RECIPE r);
