@@ -4,6 +4,7 @@
 
 
 int recipenumber;
+char searchName[MAXNAME];
 
 // PROG71985 - Winter 2024 - Group 12
 
@@ -56,6 +57,7 @@ int main(void) {
 				displayAllRecipe();
 				break;
 			case '7':
+				searchforRecipe();
 				break;
 			case '8':
 				break;
