@@ -1,5 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 
 #include "recipe.h"
+#include <string.h>
+
 // PROG71985 - Winter 2024 - Group 12
 
 RECIPE recipe[MAXRECIPES];
@@ -9,9 +11,11 @@ int numRecipes = 0;
 void addRecipe() {
     if (numRecipes < MAXRECIPES) {
         char recipeName[MAXNAME];
+        //User asks for input (enter the recipe name)
         printf("Enter recipe name:\n ");
         ignoreKeyPress(2);
         fgets(recipeName, sizeof(recipeName), stdin);
+        // Remove the newline character 
         recipeName[strcspn(recipeName, "\n")] = '\0';
         strcpy(recipe[numRecipes].name, recipeName);
         printf("Enter total number of ingredients:\n ");
@@ -49,17 +53,19 @@ void addRecipe() {
 }
 
 
+
 //Deleting a recipe
 void deleteRecipe(int recipenumber) {
-    int index = -1;
+    int recipeindex = -1;
     for (int i = 0; i < numRecipes; ++i) {
         if (recipe[i].recipeNumber == recipenumber) {
-            index = i;
+            recipeindex = i;
             break;
         }
     }
-    if (index != -1) {
-        for (int i = index; i < numRecipes - 1; ++i) {
+    // Check if the recipe to be deleted was found
+    if (recipeindex != -1) {
+        for (int i = recipeindex; i < numRecipes - 1; ++i) {
             recipe[i] = recipe[i + 1];
         }
         numRecipes--;
@@ -69,9 +75,11 @@ void deleteRecipe(int recipenumber) {
         printf("Recipe not found.\n");
     }
 }
-//Updating a recipe
+
+//Updating a recipe 
 void updateRecipe(int recipenumber) {
     int recipeindex = -1;
+    // Find the index of the recipe to be updated
     for (int i = 0; i < numRecipes; ++i) {
         if (recipe[i].recipeNumber == recipenumber) {
             recipeindex = i;
@@ -80,20 +88,40 @@ void updateRecipe(int recipenumber) {
     }
     if (recipeindex != -1) {
         printf("Enter new recipe name:\n ");
-        scanf("%s", recipe[recipeindex].name);
+        ignoreKeyPress(2);
+        fgets(recipe[recipeindex].name, sizeof(recipe[recipeindex].name), stdin);
+        recipe[recipeindex].name[strcspn(recipe[recipeindex].name, "\n")] = '\0';
+
         printf("Enter total number of ingredients:\n");
         scanf("%d", &recipe[recipeindex].totalIngredients);
+        ignoreKeyPress(2);
+        // Input validation for total number of ingredients
+        if (recipe[recipeindex].totalIngredients <= 0 || recipe[recipeindex].totalIngredients > MAXLIST) {
+            printf("Invalid number of ingredients.\n");
+            return;
+        }
         for (int i = 0; i < recipe[recipeindex].totalIngredients; ++i) {
             printf("Enter quantity for ingredient %d:\n", i + 1);
             scanf("%f", &recipe[recipeindex].ingredientList[i].quantity);
             printf("Enter name of ingredient %d:\n ", i + 1);
-            scanf("%s", recipe[recipeindex].ingredientList[i].ingredient);
+            ignoreKeyPress(2);
+            fgets(recipe[recipeindex].ingredientList[i].ingredient, sizeof(recipe[recipeindex].ingredientList[i].ingredient), stdin);
+            recipe[recipeindex].ingredientList[i].ingredient[strcspn(recipe[recipeindex].ingredientList[i].ingredient, "\n")] = '\0';
         }
+
         printf("Enter total number of steps:\n ");
         scanf("%d", &recipe[recipeindex].totalSteps);
+        ignoreKeyPress(2);
+        // Input validation for total steps of a recipe
+        if (recipe[recipeindex].totalSteps <= 0 || recipe[recipeindex].totalSteps > MAXLIST) {
+            printf("Invalid number of steps.\n");
+            return;
+        }
         for (int i = 0; i < recipe[recipeindex].totalSteps; ++i) {
             printf("Enter instruction for step %d:\n ", i + 1);
-            scanf("%s", recipe[recipeindex].stepsList[i].instruction);
+            ignoreKeyPress(2);
+            fgets(recipe[recipeindex].stepsList[i].instruction, sizeof(recipe[recipeindex].stepsList[i].instruction), stdin);
+            recipe[recipeindex].stepsList[i].instruction[strcspn(recipe[recipeindex].stepsList[i].instruction, "\n")] = '\0';
         }
         printf("Recipe updated successfully.\n");
     }
@@ -101,6 +129,7 @@ void updateRecipe(int recipenumber) {
         printf("Recipe not found.\n");
     }
 }
+
 
 void displayRecipeByNumber(int recipenumber) {
     bool receipeFound = false;
@@ -175,4 +204,38 @@ void displayRecipeByRange(int startIndex, int endIndex) {
 void ignoreKeyPress(int bufferSize) {
     char buffer[BUFFER_SIZE];
     fgets(buffer, bufferSize, stdin); // To ignore enter key press
+}
+
+
+//Searching for a recipe by name or ingredient
+void searchforRecipe() {
+    char searchTerm[MAXNAME];
+    printf("Enter recipe name or ingredient to search:\n");
+    ignoreKeyPress(2);
+    fgets(searchTerm, sizeof(searchTerm), stdin);
+    searchTerm[strcspn(searchTerm, "\n")] = '\0';
+
+    bool recipeFound = false;
+    for (int i = 0; i < numRecipes; ++i) {
+
+        // Checking if the recipe name matches the search
+        if (strstr(recipe[i].name, searchTerm) != NULL) {
+            displayRecipe(&recipe[i]);
+            recipeFound = true;
+        }
+        else {
+            // Checking if any ingredient matches the search 
+            for (int j = 0; j < recipe[i].totalIngredients; ++j) {
+                if (strstr(recipe[i].ingredientList[j].ingredient, searchTerm) != NULL) {
+                    displayRecipe(&recipe[i]);
+                    recipeFound = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (!recipeFound) {
+        printf("No recipes found matching with your search.\n");
+    }
 }

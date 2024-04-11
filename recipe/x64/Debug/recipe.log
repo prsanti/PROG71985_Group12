@@ -1,4 +1,4 @@
 ﻿  recipe.c
-C:\Users\Dell\source\repos\PROG71985_Group12p\recipe\recipe.c(11,9): warning C4013: 'printf' undefined; assuming extern returning int
-C:\Users\Dell\source\repos\PROG71985_Group12p\recipe\recipe.c(12,9): warning C4013: 'scanf' undefined; assuming extern returning int
-  recipe.vcxproj -> C:\Users\Dell\source\repos\PROG71985_Group12p\x64\Debug\recipe.exe
+C:\Users\Dell\source\repos\PROG71985_Group12\recipe\recipe.c(134,27): warning C4133: 'function': incompatible types - from 'RECIPE *' to 'RECIPE *'
+C:\Users\Dell\source\repos\PROG71985_Group12\recipe\recipe.c(144,28): warning C4028: formal parameter 1 different from declaration
+  recipe.vcxproj -> C:\Users\Dell\source\repos\PROG71985_Group12\x64\Debug\recipe.exe
