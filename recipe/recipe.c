@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 
 #include "recipe.h"
 #include <string.h>
+
 // PROG71985 - Winter 2024 - Group 12
 
 RECIPE recipe[MAXRECIPES];
@@ -10,9 +11,11 @@ int numRecipes = 0;
 void addRecipe() {
     if (numRecipes < MAXRECIPES) {
         char recipeName[MAXNAME];
+        //User asks for input (enter the recipe name)
         printf("Enter recipe name:\n ");
         ignoreKeyPress(2);
         fgets(recipeName, sizeof(recipeName), stdin);
+        // Remove the newline character 
         recipeName[strcspn(recipeName, "\n")] = '\0';
         strcpy(recipe[numRecipes].name, recipeName);
         printf("Enter total number of ingredients:\n ");
@@ -50,17 +53,19 @@ void addRecipe() {
 }
 
 
+
 //Deleting a recipe
 void deleteRecipe(int recipenumber) {
-    int index = -1;
+    int recipeindex = -1;
     for (int i = 0; i < numRecipes; ++i) {
         if (recipe[i].recipeNumber == recipenumber) {
-            index = i;
+            recipeindex = i;
             break;
         }
     }
-    if (index != -1) {
-        for (int i = index; i < numRecipes - 1; ++i) {
+    // Check if the recipe to be deleted was found
+    if (recipeindex != -1) {
+        for (int i = recipeindex; i < numRecipes - 1; ++i) {
             recipe[i] = recipe[i + 1];
         }
         numRecipes--;
@@ -90,7 +95,7 @@ void updateRecipe(int recipenumber) {
         printf("Enter total number of ingredients:\n");
         scanf("%d", &recipe[recipeindex].totalIngredients);
         ignoreKeyPress(2);
-        // Input validation for total ingredients
+        // Input validation for total number of ingredients
         if (recipe[recipeindex].totalIngredients <= 0 || recipe[recipeindex].totalIngredients > MAXLIST) {
             printf("Invalid number of ingredients.\n");
             return;
@@ -107,7 +112,7 @@ void updateRecipe(int recipenumber) {
         printf("Enter total number of steps:\n ");
         scanf("%d", &recipe[recipeindex].totalSteps);
         ignoreKeyPress(2);
-        // Input validation for total steps
+        // Input validation for total steps of a recipe
         if (recipe[recipeindex].totalSteps <= 0 || recipe[recipeindex].totalSteps > MAXLIST) {
             printf("Invalid number of steps.\n");
             return;
@@ -200,6 +205,8 @@ void ignoreKeyPress(int bufferSize) {
     char buffer[BUFFER_SIZE];
     fgets(buffer, bufferSize, stdin); // To ignore enter key press
 }
+
+
 //Searching for a recipe by name or ingredient
 void searchforRecipe() {
     char searchTerm[MAXNAME];
@@ -210,6 +217,7 @@ void searchforRecipe() {
 
     bool recipeFound = false;
     for (int i = 0; i < numRecipes; ++i) {
+
         // Checking if the recipe name matches the search
         if (strstr(recipe[i].name, searchTerm) != NULL) {
             displayRecipe(&recipe[i]);
