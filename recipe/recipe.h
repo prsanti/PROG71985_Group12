@@ -40,4 +40,7 @@ void displayRecipeByNumber(int recipenumber);
 void displayRecipeByRange(int startIndex, int endIndex);
 void displayAllRecipe();
 void ignoreKeyPress();
+void populateEmptyFile(FILE* fp);
 void searchforRecipe();
+bool loadDataFromFile(char* filename);
+bool saveDataToFile(char* filename);
