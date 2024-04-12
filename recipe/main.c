@@ -79,8 +79,8 @@ int main(void) {
 			case '7':
 				searchforRecipe();
 				break;
-			case '8':
-				break;
+			//case '8':
+			//	break;
 			case '0':
 				continueProgram = false;
 				break;

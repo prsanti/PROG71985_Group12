@@ -255,7 +255,7 @@ void populateEmptyFile(FILE* fp) {
     numRecipes = 0;
 }
 
-// DOESNT WORK YET
+// load data from file
 bool loadDataFromFile(char* filename) {
     FILE* fp = fopen(filename, "r");
 
@@ -271,14 +271,12 @@ bool loadDataFromFile(char* filename) {
             fprintf(stderr, "error creating new file\n");
             return false;
         }
-
-        // populate empty file
-        //populateEmptyFile(fp);
-        // need to flush buffer to populate
-        fflush(fp);
+        
+        // end the create file process
+        return true;
     }
 
-    // open existing or new file
+    // open existing
     fp = fopen(filename, "r");
 
     if (fp == NULL) {
@@ -295,89 +293,70 @@ bool loadDataFromFile(char* filename) {
 
     int i = 0;
 
-    while (i < MAXRECIPES) {
-        // read first line of id
-        int recipeId = fscanf(fp, "%d", &id);
-        // set array element to read data
-        recipe[i].recipeNumber = recipeId;
-
-        // read next line after id (need to test)
+    // only loop if it can read an id and set that number to the recipe id
+    while (fscanf(fp, "%d", &recipe[numRecipes].recipeNumber) > 0) {
+        // read next line after id
         fgetc(fp);
 
         // read first name line
         fgets(name, MAXNAME, fp);
 
-        // check if recipe name exists
-        if (name[0] != '\0') {
-            // update global variable count...
-            numRecipes++;
+        // update global variable count...
+        numRecipes++;
 
-            // replace last character from '\n' to '\0'
-            name[strlen(name) - 1] = '\0';
-            // set array element to read name
-            strncpy(recipe[i].name, name, MAXNAME);
+        // replace last character from '\n' to '\0'
+        name[strlen(name) - 1] = '\0';
+        // set array element to read name
+        strncpy(recipe[i].name, name, MAXNAME);
 
-            int totalIngredients = fscanf(fp, "%d", &numOfIngredients);
-            // set array element to read total ingredients
-            recipe[i].totalIngredients = totalIngredients;
+        int totalIngredients = fscanf(fp, "%d", &numOfIngredients);
+        // set array element to read total ingredients
+        recipe[i].totalIngredients = totalIngredients;
 
-            for (int j = 0; j < MAXLIST; j++) {
-                if (j + 1 <= totalIngredients) {
-                    // read quantity
-                    ingredients[j].quantity = fscanf(fp, "%f", &ingredients[j].quantity);
-                    printf("quantity: %f\n", ingredients[j].quantity);
-                    // set array element to quantity read
-                    recipe[i].ingredientList[j].quantity = ingredients[j].quantity;
+        for (int j = 0; j < MAXLIST; j++) {
+            // only loop for total ingredients
+            if (j + 1 <= totalIngredients) {
+                // read quantity
+                ingredients[j].quantity = fscanf(fp, "%f", &ingredients[j].quantity);
+                int quantity = ingredients[j].quantity;
+                // set array element to quantity read
+                recipe[i].ingredientList[j].quantity = quantity;
+                // read line after quantity
+                fgetc(fp);
 
-                    // read ingredient name
-                    fgets(ingredients[j].ingredient, MAXINGREDIENT, fp);
-                    // set array element to ingredient read
-                    strncpy(recipe[i].ingredientList[j].ingredient, ingredients[j].ingredient, MAXINGREDIENT);
-                }
-            }
-
-            // read next line after total ingredients
-            fgetc(fp);
-
-            int totalSteps = fscanf(fp, "%d", &numOfSteps);
-            // set array element to read total steps
-            recipe[i].totalSteps = numOfSteps;
-
-            for (int j = 0; j < MAXLIST; j++) {
-                if (j + 1 <= totalSteps) {
-                    // read step number
-                    steps[j].step = fscanf(fp, "%d", &steps[j].step);
-                    // set recipe step number
-                    recipe[i].stepsList[j].step = steps[j].step;
-                    // read instruction
-                    fgets(steps[j].instruction, MAXINSTRUCTION, fp);
-                    // set instruction to step number
-                    strncpy(recipe[i].stepsList[j].instruction, steps[j].instruction, MAXINSTRUCTION);
-                }
+                // read ingredient name
+                fgets(ingredients[j].ingredient, MAXINGREDIENT, fp);
+                // set array element to ingredient read
+                strncpy(recipe[i].ingredientList[j].ingredient, ingredients[j].ingredient, MAXINGREDIENT);
             }
         }
-        else {
-            //// recipe name
-            //fprintf(fp, "%s\n", "");
-            //// total ingredients
-            //fprintf(fp, "%d\n", 0);
-            //// total steps
-            //fprintf(fp, "%d\n", 0);
-            //numOfIngredients = 0;
 
-            //numOfSteps = 0;
-            int totalIngredients = fscanf(fp, "%d", &numOfIngredients);
-            // set array element to read total ingredients
-            recipe[i].totalIngredients = totalIngredients;
+        int totalSteps = fscanf(fp, "%d", &numOfSteps);
+        // set array element to read total steps
+        recipe[i].totalSteps = numOfSteps;
 
-            // set array elements to emtpy
-            //recipe[i].ingredientList
-            int totalSteps = fscanf(fp, "%d", &numOfSteps);
-            // set array element to read total steps
-            recipe[i].totalSteps = numOfSteps;
+        // read char after total steps
+        fgetc(fp);
 
+        for (int j = 0; j < MAXLIST; j++) {
+            // only loop for total steps
+            if (j + 1 <= totalSteps) {
+                // read step number
+                steps[j].step = fscanf(fp, "%d", &steps[j].step);
+                // set recipe step number
+                recipe[i].stepsList[j].step = steps[j].step;
+
+                // read next line after num of steps
+                fgetc(fp);
+
+                // read instruction
+                fgets(steps[j].instruction, MAXINSTRUCTION, fp);
+                // set instruction to step number
+                strncpy(recipe[i].stepsList[j].instruction, steps[j].instruction, MAXINSTRUCTION);
+
+                fgetc(fp);
+            }
         }
-
 
         i++;
     }
@@ -397,7 +376,7 @@ bool saveDataToFile(char* filename) {
     }
 
     // loop through each recipe and write to file
-    for (int i = 0; i < MAXRECIPES; i++) {
+    for (int i = 0; i < numRecipes; i++) {
         fprintf(fp, "%d\n", recipe[i].recipeNumber);
 
         fprintf(fp, "%s\n", recipe[i].name);
@@ -418,4 +397,29 @@ bool saveDataToFile(char* filename) {
     fclose(fp);
 
     return true;
+}
+
+// for testing - print recipe
+void printRecipe(RECIPE r) {
+    printf("---------------------------------------------\n");
+    printf("recipe num: %d\n", r.recipeNumber);
+    printf("name: %s\n", r.name);
+    printf("total ingredients: %d\n", r.totalIngredients);
+    for (int i = 0; i < r.totalIngredients; i++) {
+        printf("quantity: %0.2f\n", r.ingredientList[i].quantity);
+        printf("ingredient: %s\n", r.ingredientList[i].ingredient);
+    }
+    printf("total steps: %d\n", r.totalSteps);
+    for (int i = 0; i < r.totalSteps; i++) {
+        printf("step: %d\n", r.stepsList[i].step);
+        printf("instructions: %s\n", r.stepsList[i].instruction);
+    }
+    printf("---------------------------------------------\n");
+}
+
+// for testing - print all recipes
+void printAllRecipes() {
+    for (int i = 0; i < numRecipes; i++) {
+        printRecipe(recipe[i]);
+    }
 }
