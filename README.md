@@ -23,7 +23,7 @@ This is project provides a functionality of Recipe Make with below functionaliti
 | --- | --- | --- | --- |
 | PROG71985 | Winter 2024 | Group 12 | Recipe Maker |
 
-| Group Project Contribnuters |
+| Group Project Contributors |
 | --- |
 | Manya Chawla | 
 | Tijeet Singh |
