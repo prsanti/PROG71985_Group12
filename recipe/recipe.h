@@ -1,6 +1,7 @@
 #pragma once
 
 #define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdbool.h>
@@ -35,7 +36,7 @@ typedef struct recipe {
 void addRecipe();
 void deleteRecipe(int recipeNumber);
 void updateRecipe(int recipenumber);
-void displayRecipe(struct RECIPE* recipe);
+void displayRecipe(RECIPE* rcp);
 void displayRecipeByNumber(int recipenumber);
 void displayRecipeByRange(int startIndex, int endIndex);
 void displayAllRecipe();

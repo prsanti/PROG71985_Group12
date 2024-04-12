@@ -5,10 +5,10 @@
 
 void printWelcome() {
 	printf("\n");
-	printf("**********************\n");
-	printf("**     Welcome to   **\n");
-	printf("**    Recipe Maker  **\n");
-	printf("**********************\n");
+	printf("****************************************************\n");
+	printf("**                     Welcome to                 **\n");
+	printf("**                    Recipe Maker                **\n");
+	printf("****************************************************\n");
 	printf("\n");
 }
 

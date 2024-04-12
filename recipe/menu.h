@@ -1,7 +1,6 @@
 // PROG71985 - Winter 2024 - Group 12
 
 #define _CRT_SECURE_NO_WARNINGS
-#define BUFFER_SIZE 100
 
 #pragma once
 
