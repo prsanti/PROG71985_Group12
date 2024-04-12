@@ -19,3 +19,5 @@
 - Main menu UI
 - Save data to disk
 - Load data from disk
+- Create structs
+- Manage version control
