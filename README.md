@@ -25,7 +25,7 @@ This is project provides a functionality of Recipe Make with below functionaliti
 | Group Project Contributors |
 | --- |
 | Manya Chawla | 
-| Tijeet Singh |
+| [Tijeet Singh](https://github.com/tijeets21) |
 | Paul Santiago |
 
 ### Built With
