@@ -2,7 +2,7 @@
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-# Group Project Submission 
+# Group Project Overview
 
 This is project provides a functionality of Recipe Make with below functionalities (#group-project-submission)
 1. add a new recipe
