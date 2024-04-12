@@ -29,6 +29,9 @@ This is project provides a functionality of Recipe Make with below functionaliti
 | Tijeet Singh |
 | Paul Santiago |
 
+### Built With
+[![C][C-Image]][C-URL]
+[![VisualStudio][Visual-Studio]][Visual-Studio-url]
 
 ## Roadmap Achievement
 ### Manya
@@ -53,9 +56,7 @@ This is project provides a functionality of Recipe Make with below functionaliti
 
 [(Back to top)](#group-project-submission)
 
-### Built With
-[![C][C-Image]][C-URL]
-[![VisualStudio][Visual-Studio]][Visual-Studio-url]
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
