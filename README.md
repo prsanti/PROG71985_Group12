@@ -1,6 +1,6 @@
-#PROG71985
-##Winter 2024
-##Group 12
+# PROG71985
+## Winter 2024
+## Group 12
 ## Recipe
 ## Manya Chawla - Tijeet Singh - Paul Santiago
 
