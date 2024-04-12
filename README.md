@@ -3,6 +3,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 # Group Project Submission 
+
 This is project provides a functionality of Recipe Make with below functionalities (#group-project-submission)
 1. add a new recipe
 2. delete an existing recipe
@@ -14,6 +15,9 @@ This is project provides a functionality of Recipe Make with below functionaliti
 8. Prodivdes friendly/easy to use UI (menu system)
 9. Saves accumulated data to disk (in a file)
 10. Load accumulated data from disk (file)
+
+
+# Group Project Details 
 
 | Program Name | Session | Group Number | Group Project Name
 | --- | --- | --- | --- |
