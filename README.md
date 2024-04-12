@@ -2,8 +2,8 @@
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-# Group Project Overview
-[This is project provides a functionality of Recipe Make with below functionalities](#group-project-overview)
+# [Group Project Overview](#group-project-overview)
+This is project provides a functionality of Recipe Make with below functionalities
 1. add a new recipe
 2. delete an existing recipe
 3. update an existing recipe
