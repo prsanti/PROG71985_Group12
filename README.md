@@ -3,7 +3,6 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 # Group Project Overview
-
 This is project provides a functionality of Recipe Make with below functionalities (#group-project-submission)
 1. add a new recipe
 2. delete an existing recipe
