@@ -3,7 +3,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 # Group Project Overview
-This is project provides a functionality of Recipe Make with below functionalities (#group-project-submission)
+[This is project provides a functionality of Recipe Make with below functionalities](#group-project-overview)
 1. add a new recipe
 2. delete an existing recipe
 3. update an existing recipe
@@ -53,7 +53,7 @@ This is project provides a functionality of Recipe Make with below functionaliti
 - [x] Create structs
 - [x] Manage version control
 
-[(Back to top)](#group-project-submission)
+[(Back to top)](#group-project-overview)
 
 
 
