@@ -240,21 +240,6 @@ void searchforRecipe() {
     }
 }
 
-void populateEmptyFile(FILE* fp) {
-    for (int i = 1; i <= MAXRECIPES; i++) {
-        // recipe number
-        fprintf(fp, "%d\n", i);
-        // recipe name
-        fprintf(fp, "%s\n", "");
-        // total ingredients
-        fprintf(fp, "%d\n", 0);
-        // total steps
-        fprintf(fp, "%d\n", 0);
-    }
-    // set global variable to 0...
-    numRecipes = 0;
-}
-
 // load data from file
 bool loadDataFromFile(char* filename) {
     FILE* fp = fopen(filename, "r");
@@ -321,11 +306,14 @@ bool loadDataFromFile(char* filename) {
                 int quantity = ingredients[j].quantity;
                 // set array element to quantity read
                 recipe[i].ingredientList[j].quantity = quantity;
+
                 // read line after quantity
                 fgetc(fp);
 
                 // read ingredient name
                 fgets(ingredients[j].ingredient, MAXINGREDIENT, fp);
+                // replace last character from '\n' to '\0'
+                ingredients[j].ingredient[strlen(ingredients[j].ingredient) - 1] = '\0';
                 // set array element to ingredient read
                 strncpy(recipe[i].ingredientList[j].ingredient, ingredients[j].ingredient, MAXINGREDIENT);
             }
@@ -333,7 +321,7 @@ bool loadDataFromFile(char* filename) {
 
         int totalSteps = fscanf(fp, "%d", &numOfSteps);
         // set array element to read total steps
-        recipe[i].totalSteps = numOfSteps;
+        recipe[i].totalSteps = totalSteps;
 
         // read char after total steps
         fgetc(fp);
@@ -343,18 +331,21 @@ bool loadDataFromFile(char* filename) {
             if (j + 1 <= totalSteps) {
                 // read step number
                 steps[j].step = fscanf(fp, "%d", &steps[j].step);
+                int readStep = steps[j].step;
                 // set recipe step number
-                recipe[i].stepsList[j].step = steps[j].step;
+                recipe[i].stepsList[j].step = readStep;
 
                 // read next line after num of steps
                 fgetc(fp);
 
                 // read instruction
                 fgets(steps[j].instruction, MAXINSTRUCTION, fp);
+                // replace last character from '\n' to '\0'
+                steps[j].instruction[strlen(steps[j].instruction) - 1] = '\0';
                 // set instruction to step number
                 strncpy(recipe[i].stepsList[j].instruction, steps[j].instruction, MAXINSTRUCTION);
 
-                fgetc(fp);
+                //fgetc(fp);
             }
         }
 
