@@ -3,6 +3,8 @@
 #include "menu.h"
 
 
+#define RECIPEFILE "recipes.txt"
+
 int recipenumber;
 char searchName[MAXNAME];
 
@@ -13,6 +15,12 @@ int main(void) {
 	int startIndex;
 	int endIndex;
 	while (continueProgram) {
+
+		if (loadDataFromFile(RECIPEFILE) == false) {
+			printf("error loading file\n");
+			continueProgram = false;
+		}
+
 		printWelcome();
 		char menuChoice = printMenu();
 		if (!isdigit(menuChoice)) {
@@ -22,16 +30,28 @@ int main(void) {
 			switch (menuChoice) {
 			case '1':
 				addRecipe();
+				if (saveDataToFile(RECIPEFILE))
+					printf("Recipe saved.\n");
+				else
+					return 1;
 				break;
 			case '2':
 				printf("Enter recipe number to delete: ");
 				scanf_s("%d", &recipenumber);
 				deleteRecipe(recipenumber);
+				if (saveDataToFile(RECIPEFILE))
+					printf("Recipe saved.\n");
+				else
+					return 1;
 				break;
 			case '3':
 				printf("Enter recipe number to update: ");
 				scanf_s("%d", &recipenumber);
 				updateRecipe(recipenumber);
+				if (saveDataToFile(RECIPEFILE))
+					printf("Recipe saved.\n");
+				else
+					return 1;
 				break;
 			case '4':
 				printf("Enter recipe number: ");
