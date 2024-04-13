@@ -1,4 +1,4 @@
-
+#define CRT_SECURE_NO_WARNINGS
 #include "recipe.h"
 #include <string.h>
 
@@ -19,11 +19,11 @@ void addRecipe() {
         recipeName[strcspn(recipeName, "\n")] = '\0';
         strcpy(recipe[numRecipes].name, recipeName);
         printf("Enter total number of ingredients:\n ");
-        scanf_s("%d", &recipe[numRecipes].totalIngredients);
+        scanf("%d", &recipe[numRecipes].totalIngredients);
         for (int i = 0; i < recipe[numRecipes].totalIngredients; ++i) {
             char ingredient[MAXINGREDIENT];
             printf("Enter quantity for ingredient %d:\n ", i + 1);
-            scanf_s("%f", &recipe[numRecipes].ingredientList[i].quantity);
+            scanf("%f", &recipe[numRecipes].ingredientList[i].quantity);
             printf("Enter name of ingredient %d:\n ", i + 1);
             ignoreKeyPress(2);
             fgets(ingredient, MAXINGREDIENT, stdin);
@@ -31,7 +31,7 @@ void addRecipe() {
             strcpy(recipe[numRecipes].ingredientList[i].ingredient, ingredient);
         }
         printf("Enter total number of steps:\n ");
-        scanf_s("%d", &recipe[numRecipes].totalSteps);
+        scanf("%d", &recipe[numRecipes].totalSteps);
         ignoreKeyPress(2);
         for (int i = 0; i < recipe[numRecipes].totalSteps; ++i) {
             int stepNumber = i + 1;
@@ -93,7 +93,7 @@ void updateRecipe(int recipenumber) {
         recipe[recipeindex].name[strcspn(recipe[recipeindex].name, "\n")] = '\0';
 
         printf("Enter total number of ingredients:\n");
-        scanf_s("%d", &recipe[recipeindex].totalIngredients);
+        scanf("%d", &recipe[recipeindex].totalIngredients);
         ignoreKeyPress(2);
         // Input validation for total number of ingredients
         if (recipe[recipeindex].totalIngredients <= 0 || recipe[recipeindex].totalIngredients > MAXLIST) {
@@ -102,7 +102,7 @@ void updateRecipe(int recipenumber) {
         }
         for (int i = 0; i < recipe[recipeindex].totalIngredients; ++i) {
             printf("Enter quantity for ingredient %d:\n", i + 1);
-            scanf_s("%f", &recipe[recipeindex].ingredientList[i].quantity);
+            scanf("%f", &recipe[recipeindex].ingredientList[i].quantity);
             printf("Enter name of ingredient %d:\n ", i + 1);
             ignoreKeyPress(2);
             fgets(recipe[recipeindex].ingredientList[i].ingredient, sizeof(recipe[recipeindex].ingredientList[i].ingredient), stdin);
@@ -110,7 +110,7 @@ void updateRecipe(int recipenumber) {
         }
 
         printf("Enter total number of steps:\n ");
-        scanf_s("%d", &recipe[recipeindex].totalSteps);
+        scanf("%d", &recipe[recipeindex].totalSteps);
         ignoreKeyPress(2);
         // Input validation for total steps of a recipe
         if (recipe[recipeindex].totalSteps <= 0 || recipe[recipeindex].totalSteps > MAXLIST) {

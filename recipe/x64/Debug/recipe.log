@@ -1,4 +1,6 @@
-﻿  recipe.c
-C:\Users\Dell\source\repos\PROG71985_Group12\recipe\recipe.c(134,27): warning C4133: 'function': incompatible types - from 'RECIPE *' to 'RECIPE *'
-C:\Users\Dell\source\repos\PROG71985_Group12\recipe\recipe.c(144,28): warning C4028: formal parameter 1 different from declaration
-  recipe.vcxproj -> C:\Users\Dell\source\repos\PROG71985_Group12\x64\Debug\recipe.exe
+﻿  main.c
+  menu.c
+  recipe.c
+  Generating Code...
+  LINK : C:\Users\Dell\Source\Repos\PROG71985_Group12jaishreeshyam\x64\Debug\recipe.exe not found or not built by the last incremental link; performing full link
+  recipe.vcxproj -> C:\Users\Dell\Source\Repos\PROG71985_Group12jaishreeshyam\x64\Debug\recipe.exe
