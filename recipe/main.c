@@ -16,10 +16,10 @@ int main(void) {
 	int endIndex;
 	while (continueProgram) {
 
-		if (loadDataFromFile(RECIPEFILE) == false) {
-			printf("error loading file\n");
-			continueProgram = false;
-		}
+		//if (loadDataFromFile(RECIPEFILE) == false) {
+		//	printf("error loading file\n");
+		//	continueProgram = false;
+		//}
 
 		printWelcome();
 		char menuChoice = printMenu();

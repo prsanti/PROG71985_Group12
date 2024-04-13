@@ -245,21 +245,6 @@ void searchforRecipe() {
     }
 }
 
-void populateEmptyFile(FILE* fp) {
-    for (int i = 1; i <= MAXRECIPES; i++) {
-        // recipe number
-        fprintf(fp, "%d\n", i);
-        // recipe name
-        fprintf(fp, "%s\n", "");
-        // total ingredients
-        fprintf(fp, "%d\n", 0);
-        // total steps
-        fprintf(fp, "%d\n", 0);
-    }
-    // set global variable to 0...
-    numRecipes = 0;
-}
-
 // load data from file
 bool loadDataFromFile(char* filename) {
     FILE* fp = fopen(filename, "r");
@@ -330,6 +315,8 @@ bool loadDataFromFile(char* filename) {
 
             // read ingredient name
             fgets(ingredients[j].ingredient, MAXINGREDIENT, fp);
+            // replace last character from '\n' to '\0'
+            ingredients[j].ingredient[strlen(ingredients[j].ingredient) - 1] = '\0';
            
             // set array element to ingredient read
             strncpy(recipe[i].ingredientList[j].ingredient, ingredients[j].ingredient, MAXINGREDIENT);
@@ -354,6 +341,8 @@ bool loadDataFromFile(char* filename) {
 
             // read instruction
             fgets(steps[j].instruction, MAXINSTRUCTION, fp);
+            // replace last character from '\n' to '\0'
+            steps[j].instruction[strlen(steps[j].instruction) - 1] = '\0';
 
             // set instruction to step number
             strncpy(recipe[i].stepsList[j].instruction, steps[j].instruction, MAXINSTRUCTION);
