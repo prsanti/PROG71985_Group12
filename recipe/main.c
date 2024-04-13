@@ -14,12 +14,11 @@ int main(void) {
 	bool continueProgram = true;
 	int startIndex;
 	int endIndex;
+	if (loadDataFromFile(RECIPEFILE) == false) {
+		printf("error loading file\n");
+		continueProgram = false;
+	}
 	while (continueProgram) {
-
-		if (loadDataFromFile(RECIPEFILE) == false) {
-			printf("error loading file\n");
-			continueProgram = false;
-		}
 
 		printWelcome();
 		char menuChoice = printMenu();
@@ -30,8 +29,10 @@ int main(void) {
 			switch (menuChoice) {
 			case '1':
 				addRecipe();
-				if (saveDataToFile(RECIPEFILE))
+				if (saveDataToFile(RECIPEFILE)) {
 					printf("Recipe saved.\n");
+					continueProgram = loadDataFromFile(RECIPEFILE);
+				} 
 				else
 					return 1;
 				break;
@@ -39,8 +40,10 @@ int main(void) {
 				printf("Enter recipe number to delete: ");
 				scanf_s("%d", &recipenumber);
 				deleteRecipe(recipenumber);
-				if (saveDataToFile(RECIPEFILE))
+				if (saveDataToFile(RECIPEFILE)) {
 					printf("Recipe saved.\n");
+					continueProgram = loadDataFromFile(RECIPEFILE);
+				}
 				else
 					return 1;
 				break;
@@ -48,8 +51,10 @@ int main(void) {
 				printf("Enter recipe number to update: ");
 				scanf_s("%d", &recipenumber);
 				updateRecipe(recipenumber);
-				if (saveDataToFile(RECIPEFILE))
+				if (saveDataToFile(RECIPEFILE)) {
 					printf("Recipe saved.\n");
+					continueProgram = loadDataFromFile(RECIPEFILE);
+				}
 				else
 					return 1;
 				break;

@@ -22,10 +22,9 @@ char printMenu() {
 	printf("5. Display range of recipes by recipe numbers\n");
 	printf("6. Display all recipes\n");
 	printf("7. Search for recipe\n");
-	printf("8. Sort recipes alphabetically\n");
 	printf("0. Quit\n");
 
-	printf("Enter your choice (1-8):\n");
+	printf("Enter your choice (1-7):\n");
 
 	// convert user input to 0 or 1
 	// add space for scanf to avoid whitespace

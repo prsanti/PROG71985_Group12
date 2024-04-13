@@ -147,23 +147,25 @@ void displayRecipeByNumber(int recipenumber) {
 }
 // displaying Recipe 
 void displayRecipe(RECIPE* rcp) {
-    printf("\n################## Receipe Number : %d ##################\n\n", rcp->recipeNumber);
-    
-    printf("Receipe Name : %s \n", rcp->name);
-    
-    printf("\n============= Receipe ingredients ===============\n");
-    for (int i = 0;i < rcp->totalIngredients; i++) {
-        INGREDIENTS ingredient = rcp->ingredientList[i];
-        printf("\nIngredient Number : %d\n", (i + 1));
-        printf("-- Ingredient Quantity : %f\n", ingredient.quantity);
-        printf("-- Ingredient Name : %s", ingredient.ingredient);
+    if (strlen(rcp->name) > 0) {
+        printf("\n################## Receipe Number : %d ##################\n\n", rcp->recipeNumber);
+
+        printf("Receipe Name : %s \n", rcp->name);
+
+        printf("\n============= Receipe ingredients ===============\n");
+        for (int i = 0;i < rcp->totalIngredients; i++) {
+            INGREDIENTS ingredient = rcp->ingredientList[i];
+            printf("\nIngredient Number : %d\n", (i + 1));
+            printf("-- Ingredient Quantity : %f\n", ingredient.quantity);
+            printf("-- Ingredient Name : %s", ingredient.ingredient);
+        }
+        printf("\n================ Receipe Steps ==================\n");
+        for (int i = 0;i < rcp->totalSteps; i++) {
+            STEPS step = rcp->stepsList[i];
+            printf("-- Step %d : %s \n", step.step, step.instruction);
+        }
+        printf("#########################################################\n");
     }
-    printf("\n================ Receipe Steps ==================\n");
-    for (int i = 0;i < rcp->totalSteps; i++) {
-        STEPS step = rcp->stepsList[i];
-        printf("-- Step %d : %s \n", step.step, step.instruction);
-    }
-    printf("#########################################################\n");
 }
 
 // displaying all recipe records 
@@ -263,14 +265,14 @@ void populateEmptyFile(FILE* fp) {
 // load data from file
 bool loadDataFromFile(char* filename) {
     FILE* fp = fopen(filename, "r");
-
+    // set global variable to 0...
+    numRecipes = 0;
     // if file does not exist create a new one
     if (fp == NULL) {
         printf("%s not found, creating a new file\n", filename);
         fp = fopen(filename, "w");
 
-        // set global variable to 0...
-        numRecipes = 0;
+        
 
         if (fp == NULL) {
             fprintf(stderr, "error creating new file\n");
@@ -380,23 +382,27 @@ bool saveDataToFile(char* filename) {
     // loop through each recipe and write to file
     for (int i = 0; i < numRecipes; i++) {
         RECIPE recp = recipe[i];
-        fprintf(fp, "%d\n", recp.recipeNumber);
+        if (strlen(recp.name) > 0) {
+            fprintf(fp, "%d\n", recp.recipeNumber);
+            recp.name[strcspn(recp.name, "\n")] = '\0';
+            fprintf(fp, "%s\n", recp.name);
+            int currentTotalIngredients = recp.totalIngredients;
+            fprintf(fp, "%d\n", currentTotalIngredients);
 
-        fprintf(fp, "%s\n", recp.name);
-        int currentTotalIngredients = recp.totalIngredients;
-        fprintf(fp, "%d\n", currentTotalIngredients);
-
-        for (int j = 0; j < currentTotalIngredients; j++) {
-            INGREDIENTS ingredient = recp.ingredientList[j];
-            fprintf(fp, "%0.2f\n", ingredient.quantity);
-            fprintf(fp, "%s\n", ingredient.ingredient);
-        }
-        int currentTotalSteps = recp.totalSteps;
-        fprintf(fp, "%d\n", currentTotalSteps);
-        for (int k = 0; k < currentTotalSteps; k++) {
-            STEPS step = recp.stepsList[k];
-            fprintf(fp, "%d\n", step.step);
-            fprintf(fp, "%s\n", step.instruction);
+            for (int j = 0; j < currentTotalIngredients; j++) {
+                INGREDIENTS ingredient = recp.ingredientList[j];
+                fprintf(fp, "%0.2f\n", ingredient.quantity);
+                ingredient.ingredient[strcspn(ingredient.ingredient, "\n")] = '\0';
+                fprintf(fp, "%s\n", ingredient.ingredient);
+            }
+            int currentTotalSteps = recp.totalSteps;
+            fprintf(fp, "%d\n", currentTotalSteps);
+            for (int k = 0; k < currentTotalSteps; k++) {
+                STEPS step = recp.stepsList[k];
+                fprintf(fp, "%d\n", step.step);
+                step.instruction[strcspn(step.instruction, "\n")] = '\0';
+                fprintf(fp, "%s\n", step.instruction);
+            }
         }
     }
 
